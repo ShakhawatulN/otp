@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>Email Verification</title>
+
+   <!-- Custom Styles -->
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <div id="form1">
+      <input type="email" id="email" placeholder="Enter your valid Email" required>
+      <button type="submit" onclick="send()">Submit</button>
+   </div>
+
+   <div id="form2">
+      <input type="number" id="otp" placeholder="OTP here" required>
+      <button type="submit" onclick="otp()">OK</button>
+   </div>
+
+   <script src="https://smtpjs.com/v3/smtp.js"></script>
+   <script>
+      var otp_value = Math.floor(Math.random() * 10000);
+
+      function send() {
+         form2 = document.getElementById('form2');
+         var email = document.getElementById('email').value;
+
+         Email.send({
+            SecureToken: "cbc37d4f-b11e-4a27-9fa9-ae9a78005880",
+            To: email,
+            From: 'sakhawatulislam18@gmail.com',
+            Subject: "Email Verification",
+            Body: 'Your OTP pin is ' + otp_value
+         }).then(
+            message => alert("OTP sent to your email address- " + email + "...Please check your 'spam Emails' Your OTP is there🙂")
+         );
+         form2.style.display = 'block'
+      }
+
+      function otp() {
+         var otp = document.getElementById('otp').value;
+         if (otp == otp_value) {
+            alert('Your Email address is clarified😃')
+         } else {
+            alert('Invalid OTP🙄')
+         }
+      }
+   </script>
+</body>
+
+</html>
